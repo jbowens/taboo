@@ -1,8 +1,32 @@
 body {
   margin: 0;
   padding: 0;
-  background: #000;
   color: #FFF;
+  font-family: verdana, sans-serif;
 }
 
+#page {
+  background: #FFF;
+  margin: 1em;
+  font-size: 1.2em;
+  color: #444;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 20px 0;
+  padding: 0;
+  font-family: 'Autour One';
+}
+
+h1 { color: #B41F49; }
+
+h2, h3, h4, h5 {
+  color: #000;
+}
+
+#header {
+  margin: 0.25em;
+  padding: 0.25em;
+  font-size: 1.5em;
+}
 
