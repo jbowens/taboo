@@ -25,6 +25,13 @@ func (source *DatabaseWordSource) RandomWord() (*Word, error) {
     rows.Next()
     err = rows.Scan(&word.id, &word.word)
 
+    if err != nil {
+        return nil, err
+    }
+
+    prohibited, err := source.getProhibitedWords(word.id)
+    word.prohibited = prohibited
+
     return word, err
 }
 
@@ -43,8 +50,36 @@ func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
         if err != nil {
             return nil, err
         }
+        prohibited, err := source.getProhibitedWords(word.id)
+        if err != nil {
+            return nil, err
+        }
+        word.prohibited = prohibited
         words = append(words, word)
     }
 
     return words, nil
+}
+
+func (source *DatabaseWordSource) getProhibitedWords(wordid int) ([]string, error) {
+    stmt, err := source.db.Prepare("SELECT word FROM prohibited_words WHERE wordid = $1")
+    if err != nil {
+        return nil, err
+    }
+    defer stmt.Close()
+
+    rows, err := stmt.Query(wordid)
+    if err != nil {
+        return nil, err
+    }
+
+    var prohibitedWords []string
+
+    for rows.Next() {
+        var word string
+        rows.Scan(&word)
+        prohibitedWords = append(prohibitedWords, word)
+    }
+
+    return prohibitedWords, nil
 }

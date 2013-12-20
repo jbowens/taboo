@@ -3,4 +3,10 @@
 
 <h2 id="word">{{ .word.Word }}</h2>
 
+<ul id="prohibited_words">
+    {{range .word.SampleProhibitedWords}}
+    <li>{{.}}</li>
+    {{end}}
+</ul>
+
 {{template "footer.html" .}}
