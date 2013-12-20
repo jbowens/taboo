@@ -23,7 +23,7 @@ func (source *DatabaseWordSource) RandomWord() (*Word, error) {
 
     var word *Word = new(Word)
     rows.Next()
-    err = rows.Scan(&word.Id, &word.Word)
+    err = rows.Scan(&word.id, &word.word)
 
     return word, err
 }
@@ -38,8 +38,8 @@ func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
     var words []*Word
 
     for rows.Next() {
-        var word *Word = new(Word)
-        err = rows.Scan(&word.Id, &word.Word)
+        word := new(Word)
+        err = rows.Scan(&word.id, &word.word)
         if err != nil {
             return nil, err
         }

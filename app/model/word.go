@@ -1,7 +1,14 @@
 package model
 
 type Word struct {
-    Id int
-    Word string
+    id int
+    word string
 }
 
+func (w *Word) Id() int {
+    return w.id
+}
+
+func (w *Word) Word() string {
+    return w.word
+}
