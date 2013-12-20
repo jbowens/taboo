@@ -1,7 +1,7 @@
 package model
 
 type Word struct {
-    id int
-    word string
+    Id int
+    Word string
 }
 

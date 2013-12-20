@@ -3,7 +3,6 @@ package controllers
 import (
     "database/sql"
     "log"
-    "github.com/jbowens/taboo/app/model"
     "github.com/robfig/revel"
     _ "github.com/lib/pq"
 )
@@ -26,9 +25,13 @@ func (c App) Index() revel.Result {
 
     rows.Next()
 
-    var wordRow Word
-    rows.Scan(&wordRow)
-    word := wordRow.word
+    var id int
+    var word string
+    err = rows.Scan(&id, &word)
+
+    if err != nil {
+        log.Fatal(err)
+    }
 
 	return c.Render(word)
 }
