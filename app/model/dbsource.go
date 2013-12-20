@@ -8,6 +8,12 @@ type DatabaseWordSource struct {
     db *DB
 }
 
+func NewDatabaseWordSource(db) *DatabaseWordSource {
+    source := new(DatabaseWordSource)
+    source.db = db
+    return source
+}
+
 func RandomWord(source *DatabaseWordSource) (*Word, error) {
     rows, err := source.db.Query("SELECT * FROM words ORDER BY random() LIMIT 1")
 
