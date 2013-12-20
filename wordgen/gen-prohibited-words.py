@@ -3,6 +3,13 @@ import json
 import re
 from HTMLParser import HTMLParser
 
+
+
+===================== NO LONGER NEEDED ======================
+* See java folder for the functionality that was handled here.
+
+
+
 MAX_CHARS = 40
 
 """MLStripper strips strings of markup language.
