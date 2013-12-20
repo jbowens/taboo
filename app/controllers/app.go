@@ -3,6 +3,7 @@ package controllers
 import (
     "database/sql"
     "log"
+    "taboo/app/model"
     "github.com/robfig/revel"
     _ "github.com/lib/pq"
 )
@@ -18,20 +19,8 @@ func (c App) Index() revel.Result {
         log.Fatal(err)
     }
 
-    rows, err := db.Query("SELECT * FROM words ORDER BY random() LIMIT 1")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    rows.Next()
-
-    var id int
-    var word string
-    err = rows.Scan(&id, &word)
-
-    if err != nil {
-        log.Fatal(err)
-    }
+    source := model.NewDatabaseWordSource(db)
+    word, err := source.RandomWord()
 
 	return c.Render(word)
 }

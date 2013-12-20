@@ -5,16 +5,16 @@ import (
 )
 
 type DatabaseWordSource struct {
-    db *DB
+    db *sql.DB
 }
 
-func NewDatabaseWordSource(db) *DatabaseWordSource {
+func NewDatabaseWordSource(db *sql.DB) *DatabaseWordSource {
     source := new(DatabaseWordSource)
     source.db = db
     return source
 }
 
-func RandomWord(source *DatabaseWordSource) (*Word, error) {
+func (source *DatabaseWordSource) RandomWord() (*Word, error) {
     rows, err := source.db.Query("SELECT * FROM words ORDER BY random() LIMIT 1")
 
     if err != nil {
@@ -23,19 +23,19 @@ func RandomWord(source *DatabaseWordSource) (*Word, error) {
 
     var word *Word = new(Word)
     rows.Next()
-    err = rows.scan(&Word.Id, &Word.Word)
+    err = rows.Scan(&word.Id, &word.Word)
 
     return word, err
 }
 
-func AllWords(source *DatabaseWordSource) ([]Word, error) {
+func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
     rows, err := source.db.Query("SELECT * FROM words")
 
     if err != nil {
         return nil, err
     }
 
-    var words []Word
+    var words []*Word
 
     for rows.Next() {
         var word *Word = new(Word)
@@ -43,7 +43,7 @@ func AllWords(source *DatabaseWordSource) ([]Word, error) {
         if err != nil {
             return nil, err
         }
-        append(words, word)
+        words = append(words, word)
     }
 
     return words, nil

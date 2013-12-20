@@ -7,6 +7,6 @@ type WordSource interface {
     RandomWord() (*Word, error)
 
     // Retrieves all of the words from this word source
-    AllWords() ([]Word, error)
+    AllWords() ([]*Word, error)
 
 }
