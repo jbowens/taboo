@@ -15,18 +15,24 @@ body {
 h1, h2, h3, h4, h5 {
   margin: 20px 0;
   padding: 0;
+}
+
+h1 {
+  color: #B41F49;
   font-family: 'Autour One';
 }
 
-h1 { color: #B41F49; }
-
 h2, h3, h4, h5 {
+  font-family: 'Karla', sans-serif;
   color: #000;
 }
 
 #header {
-  margin: 0.25em;
   padding: 0.25em;
   font-size: 1.5em;
 }
 
+h2#word {
+  font-size: 6em;
+  text-align: center;
+}
