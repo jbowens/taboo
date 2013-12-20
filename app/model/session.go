@@ -1,8 +1,8 @@
 package model
 
-// A play session. We try to avoid repeating words within the
-// same session.
-type PlaySession struct {
-
-
+// Stores information about what cards have been played in a
+// user's session. It's used to prevent repeat cards within
+// the same session.
+type Session struct {
+  
 }
