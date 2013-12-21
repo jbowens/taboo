@@ -66,7 +66,9 @@ def visit(word, depth):
 visit(start, 1)
 
 # Find the words that appeared most frequently. They're probably shit.
-shit_words = map(lambda x: x[0], sorted(unigram_freqs.iteritems(), key=operator.itemgetter(1), reverse=True)[0:most_freq_cutoff])
+ordered_by_freq = map(lambda x: x[0], sorted(unigram_freqs.iteritems(), key=operator.itemgetter(1), reverse=True))
+shit_words = ordered_by_freq[0:most_freq_cutoff]
+ordered_by_freq = ordered_by_freq[most_freq_cutoff:]
 
 # Remove shit words
 for shit_word in shit_words:
@@ -75,10 +77,13 @@ for shit_word in shit_words:
         if shit_word in freqs[w]:
             del freqs[w][shit_word]
 
-sorted_words = sorted(freqs.keys())
+# We only care about words that appear reasonably often... Say the 50% most common
+words_to_use = ordered_by_freq[0:int(len(ordered_by_freq)*0.5)]
+
+sorted_words = sorted(words_to_use)
 for word in sorted_words:
     if len(freqs[word]) >= 5:
         x = sorted(freqs[word].iteritems(), key=operator.itemgetter(1), reverse=True)
         sorted_matches = map(lambda x: x[0], x)
-        print word + ': ' + ', '.join(sorted_matches[0:5])
+        print word + ': ' + ', '.join(sorted_matches[0:6])
 
