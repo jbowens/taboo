@@ -5,7 +5,7 @@ import DictionaryServices, re, operator
 #ignore_list = set(['the', 'noun', 'adjective', 'the', 'for', 'not', 'when', 'shall', 'will', 'and', 'with', 'brit', 'informal', 'but', 'that', 'from', 'verb', 'their', 'derivatives', 'adverb', 'late', 'latin', 'origin'])
 
 start = "love"
-max_depth = 10
+max_depth = 100
 min_word_len = 3
 most_freq_cutoff = 100
 
@@ -32,6 +32,9 @@ def visit(word, depth):
     if not text or len(text) == 0:
         return
 
+    # We don't care about any of the origin/etymology data, so remove it
+    text = text.split('ORIGIN')[0]
+    # Remove any punctuation, weird characters, etc.
     filtered_text = re.sub(r'[\W\d]+', ' ', text).lower()
     words = filtered_text.split()
     
