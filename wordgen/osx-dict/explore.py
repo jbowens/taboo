@@ -77,8 +77,8 @@ for shit_word in shit_words:
         if shit_word in freqs[w]:
             del freqs[w][shit_word]
 
-# We only care about words that appear reasonably often... Say the 50% most common
-words_to_use = ordered_by_freq[0:int(len(ordered_by_freq)*0.5)]
+# We only care about words that appear reasonably often... Say the 80%
+words_to_use = ordered_by_freq[0:int(len(ordered_by_freq)*0.8)]
 
 sorted_words = sorted(words_to_use)
 for word in sorted_words:
