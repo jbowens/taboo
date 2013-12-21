@@ -6,11 +6,12 @@ import DictionaryServices, re, operator
 
 start = "love"
 max_depth = 10
-min_word_len = 4
+min_word_len = 3
 most_freq_cutoff = 100
 
 visited = set([])
 freqs = dict()
+stems = dict()
 unigram_freqs = dict()
 
 def visit(word, depth):
@@ -25,6 +26,7 @@ def visit(word, depth):
 
     if not word in freqs:
         freqs[word] = dict()
+        stems[word] = dict()
 
     text = DictionaryServices.DCSCopyTextDefinition(None, word, (0, len(word)))
     if not text or len(text) == 0:
@@ -35,12 +37,25 @@ def visit(word, depth):
     
     for w in words:
         w_stem = stem(w)
-        if w != word and w_stem != word_stem:
+        if w != word and len(w) >= min_word_len and w_stem != word_stem:
             if not w in freqs:
                 freqs[w] = dict()
+                stems[w] = dict()
 
-            freqs[word][w] = 1 if w not in freqs[word] else freqs[word][w] + 1
-            freqs[w][word] = 1 if word not in freqs[w] else freqs[w][word] + 1
+            if w_stem not in stems[word]:
+                freqs[word][w] = 1 if w not in freqs[word] else freqs[word][w] + 1
+                stems[word][w_stem] = w
+            else:
+                same_stem = stems[word][w_stem]
+                freqs[word][same_stem] = freqs[word][same_stem] + 1
+
+            if word_stem not in stems[w]:
+                freqs[w][word] = 1 if word not in freqs[w] else freqs[w][word] + 1
+                stems[w][word_stem] = word
+            else:
+                same_stem = stems[w][word_stem]
+                freqs[w][same_stem] = freqs[w][same_stem] + 1
+
             unigram_freqs[w] = 1 if w not in unigram_freqs else unigram_freqs[w] + 1
             
             visit(w, depth + 1)
