@@ -2,6 +2,7 @@ package model
 
 import (
     "database/sql"
+    "strconv"
 )
 
 type DatabaseWordSource struct {
@@ -59,6 +60,31 @@ func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
     }
 
     return words, nil
+}
+
+func (source *DatabaseWordSource) Count() int {
+    var count int
+    err := source.db.QueryRow("SELECT COUNT(id) FROM words").Scan(&count)
+    if err != nil {
+        // Ignore whatever errors were produced and instead become an empty
+        // source to silently fail.
+        count = 0
+    }
+    return count
+}
+
+func (source *DatabaseWordSource) GetWord(n int) (*Word, error) {
+    word := new(Word)
+    err := source.db.QueryRow("SELECT id, word FROM words ORDER BY word ASC LIMIT " + strconv.Itoa(n) +",1").Scan(&word.id, &word.word)
+    if err != nil {
+        return nil, err
+    }
+    prohibited, err := source.getProhibitedWords(word.id)
+    if err != nil {
+        return nil, err
+    }
+    word.prohibited = prohibited
+    return word, nil
 }
 
 func (source *DatabaseWordSource) getProhibitedWords(wordid int) ([]string, error) {

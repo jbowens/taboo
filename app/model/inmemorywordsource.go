@@ -1,6 +1,7 @@
 package model
 
 import (
+    "errors"
     "math/rand"
 )
 
@@ -21,4 +22,15 @@ func (s *InMemoryWordSource) RandomWord() (*Word, error) {
 
 func (s *InMemoryWordSource) AllWords() ([]*Word, error) { 
     return s.words, nil
+}
+
+func (s *InMemoryWordSource) Count() int {
+    return len(s.words)
+}
+
+func (s *InMemoryWordSource) GetWord(n int) (*Word, error) {
+    if n >= len(s.words) {
+      return nil, errors.New("Index exceeds word source's word count.")
+    }
+    return s.words[n], nil
 }
