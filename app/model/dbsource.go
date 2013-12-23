@@ -16,7 +16,7 @@ func NewDatabaseWordSource(db *sql.DB) *DatabaseWordSource {
 }
 
 func (source *DatabaseWordSource) RandomWord() (*Word, error) {
-    rows, err := source.db.Query("SELECT * FROM words ORDER BY random() LIMIT 1")
+    rows, err := source.db.Query("SELECT id, word FROM words ORDER BY random() LIMIT 1")
 
     if err != nil {
         return nil, err
@@ -37,7 +37,7 @@ func (source *DatabaseWordSource) RandomWord() (*Word, error) {
 }
 
 func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
-    rows, err := source.db.Query("SELECT * FROM words")
+    rows, err := source.db.Query("SELECT id, word FROM words")
 
     if err != nil {
         return nil, err
