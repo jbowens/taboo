@@ -38,7 +38,9 @@ ALTER SEQUENCE prohibited_words_id_seq OWNED BY prohibited_words.id;
 
 CREATE TABLE words (
     id integer NOT NULL,
-    word character varying(255)
+    word character varying(255),
+    skipped integer NOT NULL,
+    correct integer NOT NULL
 );
 
 ALTER TABLE public.words OWNER TO taboo;
