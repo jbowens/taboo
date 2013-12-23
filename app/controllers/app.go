@@ -22,5 +22,9 @@ func (c App) Index() revel.Result {
     source := model.NewDatabaseWordSource(db)
     word, err := source.RandomWord()
 
+    if err != nil {
+        log.Fatal(err)
+    }
+
 	return c.Render(word)
 }
