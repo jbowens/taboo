@@ -22,7 +22,7 @@ CREATE TABLE prohibited_words (
     word character varying(255)
 );
 
-ALTER TABLE public.prohibited_words OWNER TO taboo;
+ALTER TABLE public.prohibited_words OWNER TO prod;
 
 CREATE SEQUENCE prohibited_words_id_seq
     START WITH 1
@@ -32,7 +32,7 @@ CREATE SEQUENCE prohibited_words_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.prohibited_words_id_seq OWNER TO taboo;
+ALTER TABLE public.prohibited_words_id_seq OWNER TO prod;
 
 ALTER SEQUENCE prohibited_words_id_seq OWNED BY prohibited_words.id;
 
@@ -43,7 +43,7 @@ CREATE TABLE words (
     correct integer NOT NULL
 );
 
-ALTER TABLE public.words OWNER TO taboo;
+ALTER TABLE public.words OWNER TO prod;
 
 CREATE SEQUENCE words_id_seq
     START WITH 1
@@ -52,7 +52,7 @@ CREATE SEQUENCE words_id_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE public.words_id_seq OWNER TO taboo;
+ALTER TABLE public.words_id_seq OWNER TO prod;
 
 ALTER SEQUENCE words_id_seq OWNED BY words.id;
 
@@ -64,14 +64,14 @@ ALTER TABLE ONLY words ALTER COLUMN id SET DEFAULT nextval('words_id_seq'::regcl
 CREATE INDEX wordid ON prohibited_words USING btree (wordid);
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM taboo;
-GRANT ALL ON SCHEMA public TO taboo;
+REVOKE ALL ON SCHEMA public FROM prod;
+GRANT ALL ON SCHEMA public TO prod;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 REVOKE ALL ON TABLE prohibited_words FROM PUBLIC;
-REVOKE ALL ON TABLE prohibited_words FROM taboo;
-GRANT ALL ON TABLE prohibited_words TO taboo;
+REVOKE ALL ON TABLE prohibited_words FROM prod;
+GRANT ALL ON TABLE prohibited_words TO prod;
 
 REVOKE ALL ON TABLE words FROM PUBLIC;
-REVOKE ALL ON TABLE words FROM taboo;
-GRANT ALL ON TABLE words TO taboo;
+REVOKE ALL ON TABLE words FROM prod;
+GRANT ALL ON TABLE words TO prod;
