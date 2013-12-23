@@ -14,7 +14,7 @@ type App struct {
 
 func (c App) Index() revel.Result {
 
-    db, err := sql.Open("postgres", "user=prod dbname=prod password=lol")
+    db, err := sql.Open("postgres", "user=prod dbname=prod password=lol sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
