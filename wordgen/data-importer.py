@@ -11,9 +11,9 @@ conn = psycopg2.connect(CONN_STR)
 cur = conn.cursor()
 count = 0
 for word in data:
-    cur.execute("INSERT INTO words (word, skipped, correct) VALUES(%s, %s, %s)",
+    cur.execute("INSERT INTO words (word, skipped, correct) VALUES(%s, %s, %s) RETURNING id",
             (word, 0, 0))
-    wordid = cur.lastrowid
+    wordid = cur.fetchone()[0]
     for prohibited in data[word]:
         cur.execute("INSERT INTO prohibited_words (wordid, word) VALUES(%s, %s)",
                 (wordid, prohibited))
