@@ -24,14 +24,14 @@ func (source *DatabaseWordSource) RandomWord() (*Word, error) {
 
     var word *Word = new(Word)
     rows.Next()
-    err = rows.Scan(&word.id, &word.word)
+    err = rows.Scan(&word.Id, &word.Word)
 
     if err != nil {
         return nil, err
     }
 
-    prohibited, err := source.getProhibitedWords(word.id)
-    word.prohibited = prohibited
+    prohibited, err := source.getProhibitedWords(word.Id)
+    word.Prohibited = prohibited
 
     return word, err
 }
@@ -47,15 +47,15 @@ func (source *DatabaseWordSource) AllWords() ([]*Word, error) {
 
     for rows.Next() {
         word := new(Word)
-        err = rows.Scan(&word.id, &word.word)
+        err = rows.Scan(&word.Id, &word.Word)
         if err != nil {
             return nil, err
         }
-        prohibited, err := source.getProhibitedWords(word.id)
+        prohibited, err := source.getProhibitedWords(word.Id)
         if err != nil {
             return nil, err
         }
-        word.prohibited = prohibited
+        word.Prohibited = prohibited
         words = append(words, word)
     }
 
@@ -75,15 +75,15 @@ func (source *DatabaseWordSource) Count() int {
 
 func (source *DatabaseWordSource) GetWord(n int) (*Word, error) {
     word := new(Word)
-    err := source.db.QueryRow("SELECT id, word FROM words ORDER BY word ASC LIMIT " + strconv.Itoa(n) +",1").Scan(&word.id, &word.word)
+    err := source.db.QueryRow("SELECT id, word FROM words ORDER BY word ASC LIMIT " + strconv.Itoa(n) +",1").Scan(&word.Id, &word.Word)
     if err != nil {
         return nil, err
     }
-    prohibited, err := source.getProhibitedWords(word.id)
+    prohibited, err := source.getProhibitedWords(word.Id)
     if err != nil {
         return nil, err
     }
-    word.prohibited = prohibited
+    word.Prohibited = prohibited
     return word, nil
 }
 

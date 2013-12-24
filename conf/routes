@@ -6,6 +6,9 @@ module:testrunner
 
 GET     /                                       App.Index
 
+# API requests
+*       /api/get-cards                          Api.Cards
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
