@@ -5,7 +5,7 @@ import (
 )
 
 type Word struct {
-    Id          int             `json:"-"`
+    Id          int             `json:"id"`
     Word        string          `json:"word"`
     Prohibited  []string        `json:"prohibited_words"`
 }
