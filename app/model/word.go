@@ -6,8 +6,8 @@ import (
 
 type Word struct {
     Id          int             `json:"-"`
-    Word        string
-    Prohibited  []string
+    Word        string          `json:"word"`
+    Prohibited  []string        `json:"prohibited_words"`
 }
 
 func (w *Word) ProhibitedWords() []string {
