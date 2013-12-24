@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-import sys, json, psycopg2
+import sys, json, psycopg2, argparse
+
+parser = argparse.ArgumentParser(description='Imports word data into the taboo database.')
+parser.add_argument('--verified', dest='verified', action='store_true', help='include if these words are verified as good quality')
+args = parser.parse_args()
 
 CONN_STR = 'dbname=prod user=prod'
 
@@ -11,8 +15,8 @@ conn = psycopg2.connect(CONN_STR)
 cur = conn.cursor()
 count = 0
 for word in data:
-    cur.execute("INSERT INTO words (word, skipped, correct) VALUES(%s, %s, %s) RETURNING id",
-            (word, 0, 0))
+    cur.execute("INSERT INTO words (word, skipped, correct, verified) VALUES(%s, %s, %s, %s) RETURNING id",
+            (word, 0, 0, args.verified == True))
     wordid = cur.fetchone()[0]
     for prohibited in data[word]:
         cur.execute("INSERT INTO prohibited_words (wordid, word) VALUES(%s, %s)",

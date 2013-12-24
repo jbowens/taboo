@@ -9,7 +9,8 @@ CREATE TABLE words (
     id serial,
     word character varying(255) UNIQUE,
     skipped integer NOT NULL DEFAULT 0,
-    correct integer NOT NULL DEFAULT 0
+    correct integer NOT NULL DEFAULT 0,
+    verified boolean NOT NULL DEFAULT FALSE
 );
 ALTER TABLE public.words OWNER TO prod;
 
