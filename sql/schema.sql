@@ -24,3 +24,17 @@ CREATE TABLE sessions (
     ipaddress bigint NOT NULL
 );
 CREATE INDEX key ON sessions USING btree (key);
+
+CREATE TABLE installs (
+    id serial,
+    key character varying(255),
+    install_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE word_interaction (
+    id serial,
+    wordid integer,
+    installid integer,
+    skipped boolean NOT NULL DEFAULT FALSE,
+    save_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
