@@ -24,17 +24,20 @@ CREATE TABLE sessions (
     ipaddress bigint NOT NULL
 );
 CREATE INDEX key ON sessions USING btree (key);
+ALTER TABLE public.sessions OWNER TO prod;
 
 CREATE TABLE installs (
     id serial,
     key character varying(255),
     install_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE public.installs OWNER TO prod;
 
-CREATE TABLE word_interaction (
+CREATE TABLE word_interactions (
     id serial,
     wordid integer,
     installid integer,
     skipped boolean NOT NULL DEFAULT FALSE,
     save_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE public.word_interactions OWNER TO prod;
