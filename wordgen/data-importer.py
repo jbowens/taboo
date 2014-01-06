@@ -11,19 +11,22 @@ data_str = '\n'.join(sys.stdin.readlines())
 data = json.loads(data_str)
 
 conn = psycopg2.connect(CONN_STR)
+conn.autocommit = True
 
 cur = conn.cursor()
 count = 0
 for word in data:
-    cur.execute("INSERT INTO words (word, skipped, correct, verified) VALUES(%s, %s, %s, %s) RETURNING id",
-            (word, 0, 0, args.verified == True))
-    wordid = cur.fetchone()[0]
-    for prohibited in data[word]:
-        cur.execute("INSERT INTO prohibited_words (wordid, word) VALUES(%s, %s)",
-                (wordid, prohibited))
-    count = count + 1
+    try:
+        cur.execute("INSERT INTO words (word, skipped, correct, verified) VALUES(%s, %s, %s, %s) RETURNING id",
+                (word, 0, 0, args.verified == True))
+        wordid = cur.fetchone()[0]
+        for prohibited in data[word]:
+            cur.execute("INSERT INTO prohibited_words (wordid, word) VALUES(%s, %s)",
+                    (wordid, prohibited))
+        count = count + 1
+    except Exception as e:
+        print e
 
-conn.commit()
 cur.close()
 conn.close()
 
