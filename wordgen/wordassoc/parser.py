@@ -16,4 +16,4 @@ with open('rawdata.txt') as f:
     lines = f.read().lower().splitlines()
     words = dict(filter(lambda y: valid_word(y[0]), zip(lines[::2], map(lambda x: x.split('|')[:20:2], lines[1::2]))))
     for w in words:
-        print w
+        print w + ': ' + ', '.join(words[w])
