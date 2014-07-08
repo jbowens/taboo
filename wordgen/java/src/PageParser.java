@@ -24,9 +24,9 @@ import java.util.Arrays;
 
 public class PageParser {
 	private HashSet<String> _omittedWords = new HashSet<String>(Arrays.asList(
-			"her", "his", "she", "he", "the", "an", "for", "not", "a", "they", 
-			"their", "us", "our", "has", "would", "such", "were", "it", "its", 
-			"are", "should", "contain", "retrieved", "ext", "per", "him", "you", 
+			"her", "his", "she", "he", "the", "an", "for", "not", "a", "they",
+			"their", "us", "our", "has", "would", "such", "were", "it", "its",
+			"are", "should", "contain", "retrieved", "ext", "per", "him", "you",
 			"com", "those", "there", "had", "was", "became"));
 	public static final int MAX_CHARS = 40;
 	public static final String WIKI_BASE_URL = "http://en.wikipedia.org";
@@ -35,15 +35,15 @@ public class PageParser {
 	private HashMap<String, Integer> _totalBiFreqs;
 	private JSONArray _links = null;
 	private int _totalLinks = 0;
-	
-	public PageParser(JSONArray links, HashMap<String, Integer> totalUniFreqs, 
+
+	public PageParser(JSONArray links, HashMap<String, Integer> totalUniFreqs,
 			HashMap<String, Integer> totalBiFreqs) {
 		_totalUniFreqs = totalUniFreqs;
 		_totalBiFreqs = totalBiFreqs;
 		_links = links;
 		_totalLinks = _links.size();
 	}
-	
+
 	public JSONObject createWords() throws IOException {
 		JSONObject obj = new JSONObject();
 		for (int i=3500; i<3900; i++) {
@@ -81,7 +81,7 @@ public class PageParser {
 		}
 		return obj;
 	}
-	
+
 	public JSONArray extractProhibitedFromContent(String pageName, String content) throws IOException {
 		JSONArray arr = new JSONArray();
 		HashMap<String, Integer> docUniFreqs = new HashMap<String, Integer>();
@@ -93,9 +93,9 @@ public class PageParser {
 		}
 		for (int j=1; j<words.length; j++) {
 			String currBigram = words[j] + " " + words[j-1];
-			int uniCount = (docUniFreqs.get(words[j]) != null) ? 
+			int uniCount = (docUniFreqs.get(words[j]) != null) ?
 					docUniFreqs.get(words[j]) : 0;
-			int biCount = (docBiFreqs.get(currBigram) != null) ? 
+			int biCount = (docBiFreqs.get(currBigram) != null) ?
 					docBiFreqs.get(currBigram) : 0;
 			docUniFreqs.put(words[j], uniCount+1);
 			docBiFreqs.put(currBigram, biCount+1);
@@ -108,7 +108,7 @@ public class PageParser {
 		for (Integer value : docBiFreqs.values()) {
 			totalBiInDoc += value;
 		}
-		MinMaxPriorityQueue<NGramValuePair> q = 
+		MinMaxPriorityQueue<NGramValuePair> q =
 				getUniLikelihoods(null, docUniFreqs, totalUniInDoc, 15);
 //			q = getBiLikelihoods(q, docBiFreqs, totalBiInDoc, 15);
 		while (!q.isEmpty()) {
@@ -124,20 +124,20 @@ public class PageParser {
 			if (p._word.substring(p._word.length()-2, p._word.length()-1) == "es") {
 				cleanWord = cleanWord.substring(0, cleanWord.length()-1);
 			}
-			if (pageName.toLowerCase().indexOf(cleanWord) < 0 && 
+			if (pageName.toLowerCase().indexOf(cleanWord) < 0 &&
 					!_omittedWords.contains(p._word)) {
 				arr.add(p._word);
 			}
 		}
 		return arr;
 	}
-	
+
 	public MinMaxPriorityQueue<NGramValuePair> getUniLikelihoods(
-			MinMaxPriorityQueue<NGramValuePair> queue, 
-			HashMap<String, Integer> unigramFreqs, 
+			MinMaxPriorityQueue<NGramValuePair> queue,
+			HashMap<String, Integer> unigramFreqs,
 			int totalUniInDoc, int maxSize) {
-		MinMaxPriorityQueue<NGramValuePair> q = 
-				(MinMaxPriorityQueue<NGramValuePair>) 
+		MinMaxPriorityQueue<NGramValuePair> q =
+				(MinMaxPriorityQueue<NGramValuePair>)
 				((queue == null) ? MinMaxPriorityQueue.create() : queue);
 		for (String word : unigramFreqs.keySet()) {
 			try {
@@ -147,7 +147,7 @@ public class PageParser {
 			} catch (NumberFormatException e) {
 				// nothing
 			}
-			int total_count = (_totalUniFreqs.get(word) != null) ? 
+			int total_count = (_totalUniFreqs.get(word) != null) ?
 					_totalUniFreqs.get(word)*_totalLinks : 0;
 			double numerator = (double)unigramFreqs.get(word)+ALPHA;
 			double denom = (double)total_count+(ALPHA*_totalUniFreqs.size());
@@ -159,17 +159,17 @@ public class PageParser {
 		}
 		return q;
 	}
-	
+
 	public MinMaxPriorityQueue<NGramValuePair> getBiLikelihoods(
-			MinMaxPriorityQueue<NGramValuePair> queue, 
-			HashMap<String, Integer> bigramFreqs, 
-			int totalBiInDoc, 
+			MinMaxPriorityQueue<NGramValuePair> queue,
+			HashMap<String, Integer> bigramFreqs,
+			int totalBiInDoc,
 			int maxSize) {
-		MinMaxPriorityQueue<NGramValuePair> q = 
-				(MinMaxPriorityQueue<NGramValuePair>) 
+		MinMaxPriorityQueue<NGramValuePair> q =
+				(MinMaxPriorityQueue<NGramValuePair>)
 				((queue == null) ? MinMaxPriorityQueue.create() : queue);
 		for (String word : bigramFreqs.keySet()) {
-			
+
 			try {
 				if (Integer.valueOf(word) > 1000 && Integer.valueOf(word) < 2013) {
 					continue;
@@ -177,8 +177,8 @@ public class PageParser {
 			} catch (NumberFormatException e) {
 				// nothing
 			}
-			
-			int total_count = (_totalBiFreqs.get(word) != null) ? 
+
+			int total_count = (_totalBiFreqs.get(word) != null) ?
 					_totalBiFreqs.get(word)*_totalLinks : 0;
 			double numerator = (double)bigramFreqs.get(word)+ALPHA;
 			double denom = (double)total_count+(ALPHA*_totalBiFreqs.size());
@@ -190,17 +190,17 @@ public class PageParser {
 		}
 		return q;
 	}
-	
+
 	private class NGramValuePair implements Comparable {
 
 		private String _word;
 		public double _value;
-		
+
 		public NGramValuePair(String word, double value) {
 			_word = word;
 			_value = value;
 		}
-		
+
 		@Override
 		public int compareTo(Object o) {
 			if (this._value < ((NGramValuePair)o)._value) {
@@ -212,7 +212,7 @@ public class PageParser {
 			}
 		}
 	}
-	
+
 	public static String getUrlSource(String link) throws IOException {
         URL url = new URL(link);
         URLConnection c = url.openConnection();

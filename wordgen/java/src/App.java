@@ -8,7 +8,7 @@ import org.json.simple.JSONObject;
 public class App {
 
 	public static final int NUM_SAMPLES = 100;
-	
+
 	public App(String linksFile) {
 		try {
 			System.out.println("Creating sampler");
@@ -34,9 +34,9 @@ public class App {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new App(args[0]);
 	}
-	
+
 }

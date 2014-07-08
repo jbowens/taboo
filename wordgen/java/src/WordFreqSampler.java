@@ -16,7 +16,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * 
+ *
  * @author florajin
  *
  */
@@ -24,12 +24,12 @@ import org.jsoup.nodes.Document;
 
 public class WordFreqSampler {
 
-	
+
 	private int _numSamples;
 	private JSONArray _links = null;
 	private HashMap<String, Integer> _totalUniFreqs;
 	private HashMap<String, Integer> _totalBiFreqs;
-	
+
 	public WordFreqSampler(Integer numSamples, String linksFile) throws IOException {
 		_totalUniFreqs = null;
 		_totalBiFreqs = null;
@@ -38,11 +38,11 @@ public class WordFreqSampler {
 		Object jsonObj = JSONValue.parse(link_data);
 		_links = (JSONArray)jsonObj;
 	}
-	
+
 	public JSONArray getLinks() {
 		return _links;
 	}
-	
+
 	public void genWordFreqs() throws IOException {
 		Random rng = new Random();
 		int maxRange = _links.size();
@@ -54,7 +54,7 @@ public class WordFreqSampler {
 		}
 		HashMap<String, Integer> uniFreqs = new HashMap<String, Integer>();
 		HashMap<String, Integer> biFreqs = new HashMap<String, Integer>();
-		
+
 		for (int i=0; i<_numSamples; i++) {
 			System.out.println("Doc #" + (i+1));
 			String link = (String)_links.get(i);
@@ -85,11 +85,11 @@ public class WordFreqSampler {
 		for (String key : biFreqs.keySet()) {
 			biFreqs.put(key, biFreqs.get(key)/_numSamples);
 		}
-		
+
 		_totalUniFreqs = uniFreqs;
 		_totalBiFreqs = biFreqs;
 	}
-	
+
 	public static String stripPunc(String input){
 	    final StringBuilder strBuilder = new StringBuilder();
 	    for(final char c : input.toCharArray())
@@ -100,19 +100,19 @@ public class WordFreqSampler {
 	        }
 	    return strBuilder.toString();
 	}
-	
+
 	public HashMap<String, Integer> getTotalUniFreqs() {
 		return _totalUniFreqs;
 	}
-	
+
 	public HashMap<String, Integer> getTotalBiFreqs() {
 		return _totalBiFreqs;
 	}
-	
-	static String readFile(String path, Charset encoding) 
+
+	static String readFile(String path, Charset encoding)
 			throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return encoding.decode(ByteBuffer.wrap(encoded)).toString();
 	}
-	
+
 }
