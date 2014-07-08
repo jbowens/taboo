@@ -37,7 +37,7 @@ def visit(word, depth):
     # Remove any punctuation, weird characters, etc.
     filtered_text = re.sub(r'[\W\d]+', ' ', text).lower()
     words = filtered_text.split()
-    
+
     for w in words:
         w_stem = stem(w)
         if w != word and len(w) >= min_word_len and w_stem != word_stem:
@@ -60,7 +60,7 @@ def visit(word, depth):
                 freqs[w][same_stem] = freqs[w][same_stem] + 1
 
             unigram_freqs[w] = 1 if w not in unigram_freqs else unigram_freqs[w] + 1
-            
+
             visit(w, depth + 1)
 
 visit(start, 1)
