@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import sys, json, re, psycopg2
+# -*- coding: utf-8 -*-
+import sys, json, re, psycopg2, DictionaryServices
 
 CONN_STR = 'dbname=prod user=prod'
 digits = re.compile('\d')
@@ -7,6 +8,22 @@ digits = re.compile('\d')
 conn = psycopg2.connect(CONN_STR)
 conn.autocommit = True
 cur = conn.cursor()
+
+prohibited_pos = ['pronoun', 'preposition', 'prefix', 'abbreviation',
+                  'exclamation', 'adverb', 'det.', 'cardinal', 'exclam.',
+                  'ordinal', 'poss.', 'interrog.', 'predet.', 'preposition,',
+                  'rel.', 'modal', 'contr.']
+
+def get_pos(word):
+    text = DictionaryServices.DCSCopyTextDefinition(None, word, (0, len(word)))
+    if not text or len(text) == 0:
+        return None
+    text = unicode(text)
+    pieces = text.split(u'▶')
+    if len(pieces) < 2:
+        return None
+    pos = pieces[1].split()[0]
+    return pos
 
 def valid_word(word):
     if bool(digits.search(word)):
@@ -19,7 +36,14 @@ def valid_word(word):
     # Make sure the word doesn't already exist.
     cur.execute("SELECT COUNT(word) FROM words WHERE word = %s;", (word,))
     exists = cur.fetchone()[0]
-    return not exists
+    if exists:
+        return False
+
+    pos = get_pos(word)
+    if pos in prohibited_pos:
+        return False
+
+    return True
 
 with open('rawdata.txt') as f:
     lines = f.read().lower().splitlines()
