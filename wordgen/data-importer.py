@@ -20,9 +20,11 @@ for word in data:
         cur.execute("INSERT INTO words (word, skipped, correct, verified) VALUES(%s, %s, %s, %s) RETURNING id",
                 (word, 0, 0, args.verified == True))
         wordid = cur.fetchone()[0]
+        prohibited_count = 0
         for prohibited in data[word]:
-            cur.execute("INSERT INTO prohibited_words (wordid, word) VALUES(%s, %s)",
-                    (wordid, prohibited))
+            prohibited_count = prohibited_count + 1
+            cur.execute("INSERT INTO prohibited_words (wordid, word, rank) VALUES(%s, %s, %s)",
+                    (wordid, prohibited, prohibited_count))
         count = count + 1
     except Exception as e:
         print e

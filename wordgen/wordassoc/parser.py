@@ -43,11 +43,29 @@ def valid_word(word):
     if pos in prohibited_pos:
         return False
 
+    if pos not in ['pl.', 'plural', 'noun']:
+        return False
+
     return True
 
 with open('rawdata.txt') as f:
     lines = f.read().lower().splitlines()
     words = dict(filter(lambda y: valid_word(y[0]), zip(lines[::2], map(lambda x: x.split('|')[:20:2], lines[1::2]))))
 
+    # Process the prohibited words
+    for w in words:
+        words_to_use = []
+        for p in words[w]:
+            use = True
+            for po in words[w]:
+                if po != p and po in p and len(p)-len(po) <= 1:
+                    # These two prohibited words are really similar.
+                    # Let's forget about the longer one.
+                    use = False
+            if use:
+                words_to_use.append(p)
+        words[w] = words_to_use
+
+    # Print all our words out.
     for w in words:
         print w + ': ' + ', '.join(words[w])

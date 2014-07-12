@@ -1,7 +1,8 @@
 CREATE TABLE prohibited_words (
     id serial,
     wordid integer,
-    word character varying(255)
+    word character varying(255),
+    rank integer not null default 1
 );
 ALTER TABLE public.prohibited_words OWNER TO prod;
 

@@ -24,7 +24,7 @@ for row in rows:
     w['id'] = row[0]
     w['word'] = row[1]
 
-    cur.execute("SELECT word FROM prohibited_words WHERE wordid = " + str(row[0]))
+    cur.execute("SELECT word FROM prohibited_words WHERE wordid = " + str(row[0]) + " ORDER BY rank ASC")
     prohibited_words = map(lambda x: x[0], cur.fetchall())
 
     w['prohibited'] = prohibited_words
