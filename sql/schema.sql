@@ -11,7 +11,8 @@ CREATE TABLE words (
     word character varying(255) UNIQUE,
     skipped integer NOT NULL DEFAULT 0,
     correct integer NOT NULL DEFAULT 0,
-    verified boolean NOT NULL DEFAULT FALSE
+    verified boolean NOT NULL DEFAULT FALSE,
+    source character varying(255)
 );
 ALTER TABLE public.words OWNER TO prod;
 CREATE INDEX wordid ON prohibited_words USING btree (wordid);

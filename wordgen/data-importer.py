@@ -3,6 +3,7 @@ import sys, json, psycopg2, argparse
 
 parser = argparse.ArgumentParser(description='Imports word data into the taboo database.')
 parser.add_argument('--verified', dest='verified', action='store_true', help='include if these words are verified as good quality')
+parser.add_argument('--source', dest='source',  help='include to set the source of these imported words')
 args = parser.parse_args()
 
 CONN_STR = 'dbname=prod user=prod'
@@ -17,8 +18,8 @@ cur = conn.cursor()
 count = 0
 for word in data:
     try:
-        cur.execute("INSERT INTO words (word, skipped, correct, verified) VALUES(%s, %s, %s, %s) RETURNING id",
-                (word, 0, 0, args.verified == True))
+        cur.execute("INSERT INTO words (word, skipped, correct, verified, source) VALUES(%s, %s, %s, %s, %s) RETURNING id",
+                (word, 0, 0, args.verified == True, args.source))
         wordid = cur.fetchone()[0]
         prohibited_count = 0
         for prohibited in data[word]:

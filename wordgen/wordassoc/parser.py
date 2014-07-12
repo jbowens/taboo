@@ -67,5 +67,4 @@ with open('rawdata.txt') as f:
         words[w] = words_to_use
 
     # Print all our words out.
-    for w in words:
-        print w + ': ' + ', '.join(words[w])
+    print json.dumps(words)

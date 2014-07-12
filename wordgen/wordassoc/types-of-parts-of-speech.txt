@@ -1,0 +1,1 @@
+set([u'det.,', u'pronoun', u'adjective', u'preposition', u'prefix', u'abbreviation', u'pl.', u'exclamation', u'adverb', u'det.', u'cardinal', u'|lous', u'plural', u'exclam.', u'ordinal', u'comb.', u'adverb,', u'verb', u'conjunction', u'poss.', u'interrog.', u'noun', u'predet.,', u'preposition,', None, u'rel.', u'modal', u'contr.'])
