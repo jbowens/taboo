@@ -18,13 +18,13 @@ cur = conn.cursor()
 count = 0
 for word in data:
     try:
-        cur.execute("INSERT INTO words (word, skipped, correct, verified, source) VALUES(%s, %s, %s, %s, %s) RETURNING id",
+        cur.execute("INSERT INTO words (word, skipped, correct, verified, source) VALUES(%s, %s, %s, %s, %s) RETURNING wid",
                 (word, 0, 0, args.verified == True, args.source))
         wordid = cur.fetchone()[0]
         prohibited_count = 0
         for prohibited in data[word]:
             prohibited_count = prohibited_count + 1
-            cur.execute("INSERT INTO prohibited_words (wordid, word, rank) VALUES(%s, %s, %s)",
+            cur.execute("INSERT INTO prohibited_words (wid, word, rank) VALUES(%s, %s, %s)",
                     (wordid, prohibited, prohibited_count))
         count = count + 1
     except Exception as e:
