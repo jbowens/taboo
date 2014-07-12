@@ -1,13 +1,13 @@
 CREATE TABLE prohibited_words (
-    id serial,
-    wordid integer,
+    pwid serial,
+    wid integer,
     word character varying(255),
     rank integer not null default 1
 );
 ALTER TABLE public.prohibited_words OWNER TO prod;
 
 CREATE TABLE words (
-    id serial,
+    wid serial,
     word character varying(255) UNIQUE,
     skipped integer NOT NULL DEFAULT 0,
     correct integer NOT NULL DEFAULT 0,
