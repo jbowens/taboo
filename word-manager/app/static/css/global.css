@@ -1,0 +1,21 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #EEE;
+  font-family: verdana, sans-serif;
+}
+
+#page {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.section {
+  background: #FFF;
+  border-radius: 0.5em;
+  -mox-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
