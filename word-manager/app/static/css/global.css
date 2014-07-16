@@ -8,9 +8,23 @@ body {
   font-family: verdana, sans-serif;
 }
 
-#page {
+#header {
+  background: #10707A;
+  color: #FFF;
+  text-align: center;
+  padding: 3em 0;
+}
+
+h1 {
+  text-align: left;
   width: 800px;
   margin: 0 auto;
+  font-family: Raleway;
+  font-weight: lighter;
+  font-size: 2.5em;
+}
+
+#page {
 }
 
 .section {
@@ -18,4 +32,82 @@ body {
   border-radius: 0.5em;
   -mox-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
+}
+
+h2, h3, h4, h5 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+}
+
+h2, h3, h4, h4 {
+  margin: 0;
+}
+
+a.classic-btn {
+  background: #FFF;
+  color: #10707A;
+  border: 1px #10707A solid;
+  border-radius: 0.5em;
+  -mox-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  padding: 0.5em;
+  font-size: 1.1em;
+  text-decoration: none;
+  font-family: Raleway;
+}
+
+a.classic-btn:hover {
+  background: #10707A;
+  color: #FFF;
+  border-color: #FFF;
+}
+
+#quick-actions {
+  margin: 2em 0;
+}
+
+.clear {
+  clear: both;
+}
+
+#content {
+  font-family: "Open Sans", sans-serif;
+  width: 800px;
+  margin: 2em auto 0 auto;
+}
+
+#inner-content {
+  padding: 0 1em;
+}
+
+#navigation {
+  background: #FFF;
+  border-radius: 0.25em;
+  -mox-border-radius: 0.25em;
+  -webkit-border-radius: 0.25em;
+}
+
+#navigation ul {
+  margin: 0;
+  padding: 1em;
+  list-style: none;
+  width: 800px;
+  margin: 0 auto;
+}
+
+#navigation ul li {
+  display: inline-block;
+  margin: 0 1em;
+}
+
+#navigation a {
+  color: #333;
+  font-weight: 500;
+  font-family: "Open Sans";
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+#navigation a:hover {
+  color: #038F9E;
 }

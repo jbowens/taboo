@@ -1,4 +1,9 @@
 {% extends 'application.html' %}
 {% block content %}
 <h2>Welcome</h2>
+<p>There are {{ verified_unverified[0] }} verified words and
+{{ verified_unverified[1] }} unverified words in the database.</p>
+<div id="quick-actions">
+    <a href="/verify-words" class="verify-words classic-btn">Begin verifying words</a>
+</div>
 {% endblock %}

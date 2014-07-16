@@ -2,18 +2,31 @@
 <html>
     <head>
         <title>Word Manager</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="/css/global.css" />
         <script type="text/javascript" src="/js/global.js"></script>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <h1>Word Manager</h1>
-            </div>
-            <div id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
+        <div id="header">
+            <h1>Tababooboo Word Database</h1>
         </div>
+        <div id="page">
+          <div id="navigation">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/verify-words">Verify words</a></li>
+              <li><a href="/import">Import words</a></li>
+              <li><a href="/export">Export words</a></li>
+            </ul>
+          </div>
+          <div id="content">
+            <div id="inner-content">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+         <div class="clear"></div>
+      </div>
     </body>
 </html>
