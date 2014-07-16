@@ -43,10 +43,11 @@ h2, h3, h4, h4 {
   margin: 0;
 }
 
-a.classic-btn {
-  background: #FFF;
-  color: #10707A;
-  border: 1px #10707A solid;
+.button-wrapper {
+  margin: 1em 0;
+}
+
+a.classic-btn, .approve-btn, .reject-btn {
   border-radius: 0.5em;
   -mox-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
@@ -54,12 +55,44 @@ a.classic-btn {
   font-size: 1.1em;
   text-decoration: none;
   font-family: Raleway;
+  background: #FFF;
+}
+
+.approve-btn, .reject-btn {
+  display: inline-block;
+}
+
+a.classic-btn:hover, .approve-btn:hover, .reject-btn:hover {
+  color: #FFF;
+  border-color: #FFF;
+  cursor: pointer;
+}
+
+a.classic-btn {
+  color: #10707A;
+  border: 1px #10707A solid;
 }
 
 a.classic-btn:hover {
   background: #10707A;
-  color: #FFF;
-  border-color: #FFF;
+}
+
+.approve-btn {
+  color: #459116;
+  border: 1px #459116 solid;
+}
+
+.approve-btn:hover {
+  background: #459116;
+}
+
+.reject-btn {
+  color: #911616;
+  border: 1px #911616 solid;
+}
+
+.reject-btn:hover {
+  background: #911616;
 }
 
 #quick-actions {
@@ -110,4 +143,39 @@ a.classic-btn:hover {
 
 #navigation a:hover {
   color: #038F9E;
+}
+
+#verifier h2 {
+  display: inline-block;
+  font-size: 1.8em;
+}
+
+#verifier .source {
+  color: #888;
+  font-size: 0.7em;
+  margin-left: 4em;
+  display: inline-block;
+}
+
+#verifier ul.prohibited-words {
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+#verifier ul.prohibited-words li {
+  font-size: 1.1em;
+  margin: 0.25em 0;
+  display: block;
+  color: #333;
+}
+
+#verifier #word-to-verify {
+  float: left;
+  width: 200px;
+}
+
+#verifier .controls {
+  padding-top: 3em;
+  margin-left: 250px;
 }

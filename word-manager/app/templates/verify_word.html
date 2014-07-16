@@ -1,0 +1,26 @@
+{% extends 'application.html' %}
+{% block content %}
+{% if word %}
+<div id="verifier">
+  <div id="word-to-verify">
+    <h2>{{ word.word }}</h2>
+    <ul class="prohibited-words">
+      {% for pword in prohibited_words %}
+      <li>{{ pword.word }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="controls">
+    <div class="button-wrapper"><div class="approve-btn"><span class="fa fa-check-circle"></span> Approve</div></div>
+    <div class="button-wrapper"><div class="reject-btn"><span class="fa fa-ban"></span> Reject</div></div>
+    <p>This word is from the <em>{{ word.source }}</em> word source.</p>
+    <p>You may reorder the prohibited words to the left to change their priorities.</p>
+  </div>
+  <div class="clear"></div>
+</div>
+{% else %}
+<h2>No words to verify</h2>
+
+<p>All words in the database have been verified. There are no pending words to verify.</p>
+{% endif %}
+{% endblock %}

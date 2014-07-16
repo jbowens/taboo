@@ -4,6 +4,8 @@
 <p>There are {{ verified_unverified[0] }} verified words and
 {{ verified_unverified[1] }} unverified words in the database.</p>
 <div id="quick-actions">
+    {% if verified_unverified[1] > 0 %}
     <a href="/verify-words" class="verify-words classic-btn">Begin verifying words</a>
+    {% endif %}
 </div>
 {% endblock %}
