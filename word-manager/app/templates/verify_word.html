@@ -6,7 +6,7 @@
     <h2>{{ word.word }}</h2>
     <ul class="prohibited-words">
       {% for pword in prohibited_words %}
-      <li>{{ pword.word }}</li>
+      <li data-pwid="{{ pword.pwid }}"><span class="fa fa-ban reject-prohibited-word"></span> {{ pword.word }}</li>
       {% endfor %}
     </ul>
   </div>

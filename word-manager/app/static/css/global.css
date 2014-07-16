@@ -179,3 +179,14 @@ a.classic-btn:hover {
   padding-top: 3em;
   margin-left: 250px;
 }
+
+#verifier .reject-prohibited-word {
+  color: #888;
+  font-size: 0.9em;
+  margin-right: 0.25em;
+  cursor: pointer;
+}
+
+#verifier .reject-prohibited-word:hover {
+  color: #911616;
+}
