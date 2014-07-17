@@ -5,7 +5,7 @@ from flask import render_template, request, current_app
 
 @main.route('/verify-words', methods=['GET'])
 def verify_words():
-  word = Word.query.filter(Word.verified==False).first()
+  word = Word.query.filter(Word.status=='unverified').first()
   if word:
     return render_template('verify_word.html', \
             word=word, \

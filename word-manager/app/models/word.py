@@ -10,7 +10,7 @@ class Word(db.Model):
     word = db.Column(db.String(50), unique=True)
     skipped = db.Column(db.Integer, nullable=False, default=0)
     correct = db.Column(db.Integer, nullable=False, default=0)
-    verified = db.Column(db.Boolean, nullable=False, default=False)
+    status = db.Column(db.Enum('unverified', 'approved', 'rejected', name="word_status"), nullable=False, default='unverified')
     source = db.Column(db.String(255))
 
     def get_prohibited_words(self):
