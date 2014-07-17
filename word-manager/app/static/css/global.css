@@ -47,7 +47,7 @@ h2, h3, h4, h4 {
   margin: 1em 0;
 }
 
-a.classic-btn, .approve-btn, .reject-btn {
+a.classic-btn, .approve-btn, .reject-btn, .classic-btn {
   border-radius: 0.5em;
   -mox-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
@@ -62,18 +62,18 @@ a.classic-btn, .approve-btn, .reject-btn {
   display: inline-block;
 }
 
-a.classic-btn:hover, .approve-btn:hover, .reject-btn:hover {
+a.classic-btn:hover, .approve-btn:hover, .reject-btn:hover, .classic-btn:hover {
   color: #FFF;
   border-color: #FFF;
   cursor: pointer;
 }
 
-a.classic-btn {
+a.classic-btn, .classic-btn {
   color: #10707A;
   border: 1px #10707A solid;
 }
 
-a.classic-btn:hover {
+a.classic-btn:hover, .classic-btn:hover {
   background: #10707A;
 }
 
@@ -189,4 +189,24 @@ a.classic-btn:hover {
 
 #verifier .reject-prohibited-word:hover {
   color: #911616;
+}
+
+#add-prohibited {
+  margin: 1em 0;
+}
+
+#add-prohibited button {
+  font-size: 1em;
+  padding: 0.25em;
+}
+
+#add-prohibited input#new-pword {
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
+  width: 130px;
+  border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  padding: 0.25em;
+  border: 1px #666 solid;
 }

@@ -9,6 +9,10 @@
       <li data-pwid="{{ pword.pwid }}"><span class="fa fa-ban reject-prohibited-word"></span> {{ pword.word }}</li>
       {% endfor %}
     </ul>
+    <form method="POST" id="add-prohibited">
+        <input type="text" name="new-pword" id="new-pword" />
+        <button class="classic-btn"><span class="fa fa-plus-circle"></span></button>
+    </form>
   </div>
   <div class="controls">
     <div class="button-wrapper"><div class="approve-btn"><span class="fa fa-check-circle"></span> Approve</div></div>
