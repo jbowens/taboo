@@ -6,6 +6,11 @@ $.extend(wm, {
 
   },
 
+  getWid: function() {
+    var wid = $('#verifier').data('wid');
+    return wid;
+  },
+
   deleteProhibitedWord: function(e) {
     var li = $(this).closest('li');
     var pwid = li.data('pwid');
@@ -14,6 +19,16 @@ $.extend(wm, {
         li.remove();
       }
     });
+  },
+
+  approveWord: function(e) {
+    var wid = wm.getWid();
+    $.post('/api/approve', {wid: wid}, function() {
+      location.reload();
+    });
+  },
+
+  rejectWord: function(e) {
   }
 
 });
@@ -21,4 +36,6 @@ $.extend(wm, {
 $(document).ready(function(e) {
   wm.init();
   $('.reject-prohibited-word').click(wm.deleteProhibitedWord);
+  $('#verifier .approve-btn').click(wm.approveWord);
+  $('#verifier .reject-btn').click(wm.rejectWord);
 });

@@ -1,7 +1,7 @@
 {% extends 'application.html' %}
 {% block content %}
 {% if word %}
-<div id="verifier">
+<div id="verifier" data-wid="{{ word.wid }}">
   <div id="word-to-verify">
     <h2>{{ word.word }}</h2>
     <ul class="prohibited-words">
