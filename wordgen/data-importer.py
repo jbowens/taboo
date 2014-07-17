@@ -18,8 +18,8 @@ cur = conn.cursor()
 count = 0
 for word in data:
     try:
-        cur.execute("INSERT INTO words (word, skipped, correct, verified, source) VALUES(%s, %s, %s, %s, %s) RETURNING wid",
-                (word, 0, 0, args.verified == True, args.source))
+        cur.execute("INSERT INTO words (word, skipped, correct, status, source) VALUES(%s, %s, %s, %s, %s) RETURNING wid",
+                (word, 0, 0, 'approved' if args.verified == True else 'unverified', args.source))
         wordid = cur.fetchone()[0]
         prohibited_count = 0
         for prohibited in data[word]:
