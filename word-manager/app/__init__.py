@@ -24,3 +24,13 @@ def handle_invalid_usage(error):
   response = jsonify(error.to_dict())
   response.status_code = error.status_code if error.status_code else 400
   return response
+
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
