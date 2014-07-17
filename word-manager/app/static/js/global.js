@@ -33,7 +33,7 @@ $.extend(wm, {
         span.className = 'fa fa-ban reject-prohibited-word';
         $(span).click(wm.deleteProhibitedWord);
         newli.appendChild(span);
-        newli.appendChild(document.createTextNode(new_pword));
+        newli.appendChild(document.createTextNode(' ' + new_pword));
         $('ul.prohibited-words').append(newli);
       }
     });
