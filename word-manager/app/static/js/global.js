@@ -27,6 +27,7 @@ $.extend(wm, {
     var wid = wm.getWid();
     $.post('/api/add-prohibited', {wid: wid, word: new_pword}, function(data) {
       if (data.status == 'ok' && data.pwid) {
+        $('#new-pword').val('');
         var newli = document.createElement('li');
         $(newli).data('pwid', data.pwid);
         var span = document.createElement('span');
