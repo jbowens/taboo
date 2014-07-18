@@ -16,9 +16,9 @@ $.extend(wm, {
     var pwid = li.data('pwid');
     $.post('/api/remove-prohibited', {pwid: pwid}, function(data) {
       if (data.status == 'ok') {
-        li.remove();
       }
     });
+    li.remove();
   },
 
   addProhibitedWord: function(e) {
