@@ -1,0 +1,24 @@
+{% extends 'application.html' %}
+{% block content %}
+<h2>Log in</h2>
+
+{% if login_failed %}
+<p>Invalid login credentials</p>
+{% endif %}
+
+{{ login_failed }}
+
+<form method="post" id="login">
+    <table cellspacing="0">
+        <tr>
+            <td><label for="login_username">Username</label></td>
+            <td><input type="text" id="login_username" name="username" class="classic" /></td>
+        </tr>
+        <tr>
+            <td><label for="login_password">Password</label></td>
+            <td><input type="password" id="login_password" name="password" class="classic" /></td>
+        </tr>
+    </table>
+    <div><button class="classic-btn"><span class="fa fa-sign-in"></span> Log in</button></div>
+</form>
+{% endblock content %}

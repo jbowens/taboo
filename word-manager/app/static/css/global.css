@@ -200,7 +200,8 @@ a.classic-btn:hover, .classic-btn:hover {
   padding: 0.25em;
 }
 
-#add-prohibited input#new-pword {
+#add-prohibited input#new-pword,
+input.classic {
   font-size: 1em;
   font-family: "Open Sans", sans-serif;
   width: 130px;
@@ -209,4 +210,12 @@ a.classic-btn:hover, .classic-btn:hover {
   -webkit-border-radius: 0.5em;
   padding: 0.25em;
   border: 1px #666 solid;
+}
+
+form#login table td {
+  padding: 1em 1em 1em 0;
+}
+
+form#login input.classic {
+  width: 200px;
 }
