@@ -15,8 +15,15 @@
     </form>
   </div>
   <div class="controls">
+    {% if word.status != 'unverified' %}
+    <p>This word is currently <em>{{ word.status }}</em>.</p>
+    {% endif %}
+    {% if word.status != 'approved' %}
     <div class="button-wrapper"><div class="approve-btn"><span class="fa fa-check-circle"></span> Approve</div></div>
+    {% endif %}
+    {% if word.status != 'rejected' %}
     <div class="button-wrapper"><div class="reject-btn"><span class="fa fa-ban"></span> Reject</div></div>
+    {% endif %}
     <p>This word is from the <em>{{ word.source }}</em> word source.</p>
   </div>
   <div class="clear"></div>

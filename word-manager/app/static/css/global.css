@@ -120,12 +120,79 @@ a.classic-btn:hover, .classic-btn:hover {
   -webkit-border-radius: 0.25em;
 }
 
+#navigation .inner-nav {
+  width: 800px;
+  margin: 0 auto;
+}
+
 #navigation ul {
+  display: inline-block;
   margin: 0;
   padding: 1em;
   list-style: none;
-  width: 800px;
-  margin: 0 auto;
+}
+
+#navigation form#search {
+  display: inline-block;
+  margin-left: 2em;
+  position: relative;
+}
+
+form#search button {
+  font-size: 0.9em;
+  padding: 0.45em;
+  vertical-align: top;
+}
+
+form#search .search-results {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FFF;
+  border: 1px #BBB solid;
+  height: 200px;
+  width: 150px;
+  overflow: scroll;
+  padding: 0;
+  margin: 2.5em 0 0 0;
+}
+
+form#search .search-results li {
+  margin: 0;
+  width: 100%;
+}
+
+form#search .no-results {
+  font-size: 0.8em;
+  color: #555;
+}
+
+form#search .no-results p {
+  padding: 0.5em;
+}
+
+form#search .search-results li .word {
+  padding: 0.25em 0.25em 0 0.25em;
+}
+
+.search-results li:hover {
+  background: #EEE;
+  cursor: pointer;
+}
+
+form#search .search-results li .status {
+  font-size: 0.7em;
+  text-decoration: none;
+  padding: 0.25em 0.5em;
+}
+
+.search-results li.status-rejected {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.search-results li.status-approved {
+  color: #507306;
 }
 
 #navigation ul li {

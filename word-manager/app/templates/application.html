@@ -19,12 +19,18 @@
         </div>
         <div id="page">
           <div id="navigation">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/verify-words">Verify words</a></li>
-              <li><a href="/import">Import words</a></li>
-              <li><a href="/export">Export words</a></li>
-            </ul>
+            <div class="inner-nav">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/verify-words">Verify words</a></li>
+                  <li><a href="/import">Import words</a></li>
+                  <li><a href="/export">Export words</a></li>
+                </ul>
+                <form method="post" id="search">
+                    <input type="text" id="search-query" name="q" class="classic" placeholder="search" autocomplete="off" />
+                    <button class="classic-btn"><span class="fa fa-search"></span></button>
+                </form>
+            </div>
           </div>
           <div id="content">
             <div id="inner-content">
