@@ -100,7 +100,16 @@ $.extend(wm, {
         }
       }
     });
-  }
+  },
+
+  downloadInitiated: function(e) {
+    if ($(this).data('disabled')) {
+      e.preventDefault();
+    } else {
+      $(this).html('Generating&hellip;');
+      $(this).data('disabled', true);
+    }
+  },
 
 });
 
@@ -111,4 +120,5 @@ $(document).ready(function(e) {
   $('#verifier .reject-btn').click(wm.rejectWord);
   $('form#add-prohibited').submit(wm.addProhibitedWord);
   $('form#search').submit(wm.searchFormSubmitted);
+  $('a#download-export').click(wm.downloadInitiated);
 });

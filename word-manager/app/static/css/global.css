@@ -286,3 +286,7 @@ form#login table td {
 form#login input.classic {
   width: 200px;
 }
+
+.spacer {
+  margin: 2em 0;
+}
