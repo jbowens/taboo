@@ -5,8 +5,8 @@ from flask import render_template, request, current_app
 from sqlalchemy import func
 
 @main.route('/verify-words', methods=['GET'])
-def verify_words(wid):
-  return view_word(wid)
+def verify_words():
+  return view_word()
 
 @main.route('/verify-words/<wid>', methods=['GET'])
 def view_word(wid=None):
